@@ -1,0 +1,34 @@
+# Авторизация, регистрация, восстановление пароля
+
+Для вышеприведенных целей служит компонент user предварительно сконфигурированный в настройках.
+
+3.2.1. Авторизация
+
+Рекомендуется выполнять в контроллере по умалочанию реализацией действия login()
+   public function actionLogin()
+    {
+        if(Application::app()->request->post('__username') != '' AND Application::app()->request->post('__password') != '')
+        {
+            if(User::auth(Application::app()->request->post('__username'), Application::app()->request->post('__password')))
+            {
+                return $this->redirect('/');
+            }
+        }
+        $this->render('login', [
+
+        ]);
+    }
+Переменные __username, __password должны быть переданы совместно с __rememberMe методом POST
+Пример минималистичной реализации
+  <section>
+    <div class="login">
+        <form action="" method="post">
+            <label>Ваш E-Mail</label>
+            <input type="text" name="__username">
+            <label>Пароль:</label>
+            <input type="password" name="__password">
+            <label><input type="checkbox" name="_rememberMe" value="true"> Запомнить меня</label>
+            <button>Войти</button>
+        </form>
+    </div>
+</section>
