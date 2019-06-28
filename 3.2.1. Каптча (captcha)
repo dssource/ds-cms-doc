@@ -1,0 +1,17 @@
+3.2.1. Каптча (captcha)
+
+Контроллер
+
+Необходимо определить в контроллере метод для работы с каптчей
+Объект каптчи создать из класса framework\helpers\captcha\Captcha
+
+Пример реализации контроллера
+
+  public function actionCaptcha()
+    {
+        $captcha = Application::createObject('framework\helpers\captcha\Captcha');
+        return $captcha->captcha();
+    }
+
+
+
